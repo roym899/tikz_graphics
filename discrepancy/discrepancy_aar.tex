@@ -1,0 +1,50 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage{tikz_utils}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+
+\usetikzlibrary{positioning}
+\begin{document}
+
+
+\begin{tikzpicture}[scale=1]
+
+    \path[draw, thick] (0,0) rectangle (5,5);
+    \clip (0,0) rectangle (5,5);
+    \useasboundingbox (0,0) rectangle (5,5);
+    \pgfmathsetmacro{\N}{100}
+    \pgfmathsetseed{4}
+    
+    % dispersion circle
+    \begin{scope}
+        \clip (0,0) rectangle (5,5);
+        \coordinate (center) at (3.225,3.28);
+        \pgfmathsetmacro{\dispersion}{0.585};
+        \path[draw, dashed, fill=gray, fill opacity=0.2] (2,2) rectangle ++ (2,2);
+        \path[draw, dashed, fill=gray, fill opacity=0.2] (0.1,1.5) rectangle ++ (3,1);
+        \path[draw, dashed, fill=gray, fill opacity=0.2] (0.4,0.3) rectangle ++ (4,0.5);
+        \path[draw, dashed, fill=gray, fill opacity=0.2] (3.2,3.7) rectangle ++ (1,0.8);
+        \path[draw, dashed, fill=gray, fill opacity=0.2] (3.5,1.2) rectangle ++ (0.6,0.4);
+        \path[draw=green, dashed, fill=green, fill opacity=0.2] (0.50,3.17) rectangle ++ (3.3,0.85);
+    \end{scope}
+    
+    % draw the nodes
+    \foreach \i in {1,...,\N} {
+        \path[draw, fill] (rnd*5, rnd*5) circle (0.05);
+    }
+    
+    
+
+
+\end{tikzpicture}
+\end{document}

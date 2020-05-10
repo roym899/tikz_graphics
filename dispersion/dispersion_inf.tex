@@ -1,0 +1,45 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage{tikz_utils}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+
+\usetikzlibrary{positioning}
+\begin{document}
+
+
+\begin{tikzpicture}[scale=1]
+
+    \path[draw, thick] (0,0) rectangle (5,5);
+    \clip (0,0) rectangle (5,5);
+    \useasboundingbox (0,0) rectangle (5,5);
+    \pgfmathsetmacro{\N}{100}
+    \pgfmathsetseed{4}
+    
+    % dispersion circle
+    \begin{scope}
+        \clip (0,0) rectangle (5,5);
+        \coordinate (center) at (3.225,3.28);
+        \pgfmathsetmacro{\dispersion}{0.585};
+        \path[draw, dashed, fill=gray, fill opacity=0.2] (center) ++ (-\dispersion,-\dispersion) rectangle ++ (2*\dispersion,2* \dispersion);
+        \path[draw, <->] (center) ++(0, 0.25) --  ++({cos(0)*\dispersion}, {sin(0)*\dispersion}) node [shift={(-0.1,-0.28)},midway] {$d_\infty$};
+    \end{scope}
+    
+    % draw the nodes
+    \foreach \i in {1,...,\N} {
+        \path[draw, fill] (rnd*5, rnd*5) circle (0.05);
+    }
+    
+
+
+\end{tikzpicture}
+\end{document}
