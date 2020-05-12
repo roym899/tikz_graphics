@@ -1,0 +1,66 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+\usetikzlibrary{positioning}
+\begin{document}
+
+    \begin{tikzpicture}[scale=1]
+
+        \useasboundingbox (0,0) rectangle (5,3);
+
+        \coordinate (init) at (0.5,0.5);
+        \coordinate (goal) at (4.6,2.25);
+        \coordinate (obs1) at (2.4,2.1);
+        \coordinate (obs2) at (3.7,0.65);
+
+        \coordinate (n0) at (0.8, 2.3);
+        \coordinate (sample1) at (4.7, 0.5);
+        \coordinate (n1) at ($(init)!(sample1)!(n0)$);
+        \coordinate (n2) at ($(n1)!0.5!(sample1)$);
+        \coordinate (n3) at ($(n2)!0.45!(goal)$);
+        \coordinate (n4) at (1.7,0.3);
+        \coordinate (n5) at ($(n1)!(n4)!(n2)$);
+        \coordinate (n6) at (3.5, 2.7);
+        \coordinate (n7) at ($(n3)!(goal)!(n6)$);
+
+        \coordinate (sample_projection) at ($(init)!(sample1)!(n0)$);
+        
+        \path[draw, very thick] (0,0) -- (5,0) -- (5,3) -- (0,3) -- cycle;
+    
+        \path[draw] (init) -- (n0);
+        \path[draw] (n1) -- (n2);
+        \path[draw] (n2) -- (n3);
+        \path[draw] (n4) -- (n5);
+        \path[draw] (n3) -- (n6);
+        \path[draw, red] (n7) -- (goal);
+
+
+        \path[draw, very thick, rounded corners=14pt, fill=black!30] (obs1) ++(-1.2,-1) -- ++(2,0.2) -- ++(0,1) -- ++(-1.5,0.5) -- cycle;
+        \path[draw, very thick, rounded corners=4pt, fill=black!30] (obs2) ++(-1.5,-0.25) -- ++(0,0.3) -- ++(1.3,0.2) -- ++(0.2,1) -- ++(0.3,0) -- ++(0.3,-1.6) -- cycle;
+
+
+        % Vertices on top of everything
+        \path[draw, fill] (init) circle (0.05) node[below] {$x_\mathrm{init}$};
+        \path[draw, red, fill] (goal) circle (0.05) node[above] {$x_\mathrm{goal}$};
+
+        \draw[draw, fill] (n0) circle (0.05);
+        \draw[draw, fill] (n1) circle (0.05);
+        \draw[draw, fill] (n2) circle (0.05);
+        \draw[draw, fill] (n3) circle (0.05);
+        \draw[draw, fill] (n4) circle (0.05);
+        \draw[draw, fill] (n5) circle (0.05);
+        \draw[draw, fill] (n6) circle (0.05);
+        \draw[draw, fill, red] (n7) circle (0.05);
+
+    \end{tikzpicture}
+\end{document}
