@@ -1,0 +1,66 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+\usetikzlibrary{positioning}
+\begin{document}
+
+    \begin{tikzpicture}[scale=1]
+
+        \useasboundingbox (0,0) rectangle (5,3);
+
+        \coordinate (init) at (0.5,0.5);
+        \coordinate (goal) at (4.6,2.25);
+        \coordinate (obs1) at (2.4,2.1);
+        \coordinate (obs2) at (3.7,0.65);
+
+        \coordinate (n0) at (0.6, 1.5);
+        \coordinate (n0_0) at ($(init)!0.5cm!(n0)$);
+        \coordinate (n0_1) at ($(init)!1cm!(n0)$);
+        \coordinate (n1) at (0.3, 2.3);
+        \coordinate (n1_0) at ($(n0)!0.5cm!(n1)$);
+        \coordinate (n2) at (1.3, 0.4);
+        \coordinate (n2_0) at ($(init)!0.5cm!(n2)$);
+        \coordinate (n3) at (2.3, 1.1);
+        \coordinate (n3_0) at ($(n2)!0.5cm!(n3)$);
+        \coordinate (n3_1) at ($(n2)!1cm!(n3)$);
+        \coordinate (n3_2) at ($(n2)!1.5cm!(n3)$);
+
+        \coordinate (sample) at (0.8, 1.1);
+
+        \path[draw, fill] (init) circle (0.05) node[below] {$x_\mathrm{init}$};
+        \path[draw] (goal) circle (0.05) node[above] {$x_\mathrm{goal}$};
+
+        \path[draw, very thick] (0,0) -- (5,0) -- (5,3) -- (0,3) -- cycle;
+
+        \path[draw] (init) -- (n0) -- (n1);
+        \path[draw] (init) -- (n2) -- (n3);
+
+        \draw[draw, red] (n0_0) -- (sample);
+        
+        \foreach \x in {0,...,3}
+            \path[draw, fill] (n\x) circle (0.05);
+
+        \path[draw, fill] (n0_0) circle (0.05);
+        \path[draw, fill] (n0_1) circle (0.05);
+        \path[draw, fill] (n1_0) circle (0.05);
+        \path[draw, fill] (n2_0) circle (0.05);
+        \path[draw, fill] (n3_0) circle (0.05);
+        \path[draw, fill] (n3_1) circle (0.05);
+
+        \draw[draw, fill, red] (sample) circle (0.05);
+
+        \path[draw, very thick, rounded corners=14pt, fill=black!30] (obs1) ++(-1.2,-1) -- ++(2,0.2) -- ++(0,1) -- ++(-1.5,0.5) -- cycle;
+        \path[draw, very thick, rounded corners=4pt, fill=black!30] (obs2) ++(-1.5,-0.25) -- ++(0,0.3) -- ++(1.3,0.2) -- ++(0.2,1) -- ++(0.3,0) -- ++(0.3,-1.6) -- cycle;
+
+    \end{tikzpicture}
+\end{document}
