@@ -10,19 +10,6 @@ $(info PNG_FILES="$(PNG_FILES)")
 $(info PNG_FILE_PATHS="$(PNG_FILE_PATHS)")
 $(info TEX_DIRS="$(TEX_DIRS)")
 
-# SRC_DIR := .../src
-# pngs =  build/arm_environment_collision.png
-# $(pngs): build/%.png : figures/%.tex
-# 	-rm -f build/$*.aux build/$*.log build/$*.out build/$*.sta
-# 	pdflatex -halt-on-error  --output-directory=build $<
-# 	-rm -f build/$*.aux build/$*.log build/$*.out build/$*.sta
-# 	pdftoppm -png -r 600 build/$*.pdf >build/$*.png
-
-# -rm -f build/$*.aux build/$*.log build/$*.out build/$*.sta
-# pdflatex -halt-on-error  --output-directory=build $<
-# -rm -f build/$*.aux build/$*.log build/$*.out build/$*.sta
-# pdftoppm -png -r 600 build/$*.pdf >build/$*.png
-
 all: $(PNG_FILE_PATHS)
 
 $(PNG_FILE_PATHS):
