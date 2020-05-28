@@ -1,0 +1,40 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{tikz_utils}
+
+\begin{document}
+% \begin{tikzpicture}
+% \path
+%     (-2, 3) coordinate (A)
+%     ( 3, 4) coordinate (B)
+%     ( 2,-1) coordinate (C)
+%     (-2,-4) coordinate (D)
+%     (-4, 0) coordinate (E);
+
+% \draw[preaction={contour=10pt, rounded corners, fill=gray}]
+%   (A) -- (B) -- (C) -- (D) -- (E) -- cycle;
+
+% \foreach \coord in {A,...,E} \fill (\coord) circle [radius=2pt];
+% \end{tikzpicture}
+
+\begin{tikzpicture}
+    \draw[ultra thick, contour=-.5\pgflinewidth, opacity=0.5]  (0,0) -- (0,1) -- (1,1) -- cycle ;
+    \draw[ultra thick, red, opacity=0.5]  (0,0) -- (0,1) -- (1,1) -- cycle ;
+    \draw[ultra thick, blue, contour=.5\pgflinewidth, opacity=0.5]  (0,0) -- (0,1) -- (1,1) -- cycle ;
+
+    \draw[ultra thick, opacity=0.5]  (0.75,0.25) circle(0.2cm - 0.5\pgflinewidth);
+    \draw[ultra thick, red, opacity=0.5]  (0.75,0.25) circle(0.2cm);
+    \draw[ultra thick, blue, opacity=0.5]  (0.75,0.25) circle(0.2cm + 0.5\pgflinewidth);
+\end{tikzpicture}
+
+\end{document}

@@ -3,6 +3,10 @@
 
 \RequirePackage{tikz}
 
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations,backgrounds}
+
 \providecommand{\getDistance}[2]{%
     % \pgfmathanglebetweenpoints{\pgfpointanchor{#1}{center}}
                             %   {\pgfpointanchor{#2}{center}}
@@ -14,5 +18,45 @@
     \pgfmathparse{veclen(\pgf@xa,\pgf@ya)/28.45274} % to convert from pt to cm   
     \global\let\mydistance\pgfmathresult% we need a global macro
 }
+
+\makeatletter
+\usetikzlibrary{decorations,backgrounds}
+\def\pgfdecoratedcontourdistance{0pt}
+\pgfset{
+  decoration/contour distance/.code=%
+    \pgfmathsetlengthmacro\pgfdecoratedcontourdistance{#1}}
+\pgfdeclaredecoration{contour lineto closed}{start}{%
+  \state{start}[
+    next state=draw,
+    width=0pt,
+    persistent precomputation=\let\pgf@decorate@firstsegmentangle\pgfdecoratedangle]{%
+    \pgfpathmoveto{\pgfpointlineattime{.5}
+      {\pgfqpoint{0pt}{\pgfdecoratedcontourdistance}}
+      {\pgfqpoint{\pgfdecoratedinputsegmentlength}{\pgfdecoratedcontourdistance}}}%
+  }%
+  \state{draw}[next state=draw, width=\pgfdecoratedinputsegmentlength]{%
+    \ifpgf@decorate@is@closepath@%
+      \pgfmathsetmacro\pgfdecoratedangletonextinputsegment{%
+        -\pgfdecoratedangle+\pgf@decorate@firstsegmentangle}%
+    \fi
+    \pgfmathsetlengthmacro\pgf@decoration@contour@shorten{%
+      -\pgfdecoratedcontourdistance*cot(-\pgfdecoratedangletonextinputsegment/2+90)}%
+    \pgfpathlineto
+      {\pgfpoint{\pgfdecoratedinputsegmentlength+\pgf@decoration@contour@shorten}
+      {\pgfdecoratedcontourdistance}}%
+    \ifpgf@decorate@is@closepath@%
+      \pgfpathclose
+    \fi
+  }%
+  \state{final}{}%
+}
+\makeatother
+\tikzset{
+  contour/.style={
+    decoration={
+      name=contour lineto closed,
+      contour distance=#1
+    },
+    decorate}}
 
 \endinput

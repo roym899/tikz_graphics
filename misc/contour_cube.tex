@@ -1,0 +1,21 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{tikz_utils}
+
+\begin{document}
+  \begin{tikzpicture}
+      \draw[ultra thick, contour=.5\pgflinewidth, fill=gray]  (0,0,0) -- (2,0,0) -- (2,2,0) -- (0,2,0) -- cycle ;
+      \draw[ultra thick, contour=.5\pgflinewidth, fill=gray]  (2,0,0) -- (2,0,-2) -- (2,2,-2) -- (2,2,0) -- cycle ;
+      \draw[ultra thick, contour=.5\pgflinewidth, fill=gray]  (0,2,0) -- (2,2,0) -- (2,2,-2) -- (0,2,-2) -- cycle ;
+  \end{tikzpicture}
+\end{document}
