@@ -51,3 +51,10 @@ Collection of personal tikz graphics
 ### Dispersion
 
 ### Discrepancy
+
+## Machine Learning
+
+### Graphical Models
+| Name | Source | Preview | 
+|------|--------|---------|
+|[Bishop](https://www.springer.com/gp/book/9780387310732) Style|[graphica_models/bishop_style.tex](fmt/fmt_8.tex) | ![alt text](previews/bishop_style.png) | 
