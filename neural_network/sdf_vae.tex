@@ -1,0 +1,43 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{tikz_utils}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations,backgrounds}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1]
+    \draw[thick] node[right](v_sdf) at (0,0) {$V_\mathrm{SDF}$};
+    \draw[thick] (v_sdf.east) -- ++ (0.8,0) coordinate (sdf_vae_enc_in);
+
+    \draw[thick, contour=0.48\pgflinewidth, fill=red!20] (sdf_vae_enc_in) ++(0,1,1) -- ++(0,-2,0) -- ++(1,0.5,-0.5) -- ++(0,1,0) -- cycle;
+    \draw[thick, contour=0.48\pgflinewidth, fill=red!20] (sdf_vae_enc_in) ++(1,0.5,0.5) -- ++(0,-1,0) -- ++(0,0,-1) -- ++(0,1,0) -- cycle;
+    \draw[thick, contour=0.48\pgflinewidth, fill=red!20] (sdf_vae_enc_in) ++(0,1,1) -- ++(1,-0.5,-0.5) -- ++(0,0,-1) -- ++(-1,0.5,-0.5) -- cycle;
+
+    \draw[thick] (sdf_vae_enc_in) ++ (1,0) -- ++ (0.8,0) coordinate (sdf_vae_enc_out);
+
+    \draw[thick] node[anchor=west](z_obj) at (sdf_vae_enc_out) {$z_\mathrm{obj}$};
+
+    \draw[thick] (z_obj.east) -- +(0.8,0) coordinate(sdf_vae_in);
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (sdf_vae_in) ++(0,0.5,0.5) -- ++(0,-1,0) -- ++(1,-0.5,0.5) -- ++(0,2,0) -- cycle;
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (sdf_vae_in) ++(1,1,1) -- ++(0,-2,0) -- ++(0,0,-2) -- ++(0,2,0) -- cycle;
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (sdf_vae_in) ++(0,0.5,0.5) -- ++(1,0.5,0.5) -- ++(0,0,-2) -- ++(-1,-0.5,0.5) -- cycle;
+    \coordinate (sdf_vae_out) at ($(sdf_vae_in)+(1,0,0)$);
+    \draw[thick] (sdf_vae_out) -- ++(0.8,0,0) node[right] (sdf_volume) {$\widetilde{V}_\mathrm{SDF}$};
+ 
+    
+\end{tikzpicture}
+\end{document}

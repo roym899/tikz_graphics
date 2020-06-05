@@ -1,0 +1,112 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{tikz_utils}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations,backgrounds}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1]
+    \coordinate (image_r) at (-5.8,2.0,0);
+    \coordinate (image_g) at (-5.6,2.0,0);
+    \coordinate (image_b) at (-5.4,2.0,0);
+    \coordinate (depth) at (-5.6,-2.0,0);
+    \coordinate (concat_depth) at (-0.2,0,0);
+    \coordinate (concat_mask) at (0,0,0);
+
+    % RGB image
+    \draw[thin, contour=0.48\pgflinewidth, fill=red!30] (image_r) ++(0,0.6,0.9) -- ++(0,-1.2,0) -- ++(0.2,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=red!30] (image_r) ++(0.2,0.6,0.9) -- ++(0,-1.2,0) -- ++(0,0,-1.8) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=red!30] (image_r) ++(0,0.6,0.9) -- ++(0.2,0,0) -- ++(0,0,-1.8) -- ++(-0.2,0,0) -- cycle;
+
+    \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0,0.6,0.9) -- ++(0,-1.2,0) -- ++(0.2,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0.2,0.6,0.9) -- ++(0,-1.2,0) -- ++(0,0,-1.8) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0,0.6,0.9) -- ++(0.2,0,0) -- ++(0,0,-1.8) -- ++(-0.2,0,0) -- cycle;
+
+    \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0,0.6,0.9) -- ++(0,-1.2,0) -- ++(0.2,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0.2,0.6,0.9) -- ++(0,-1.2,0) -- ++(0,0,-1.8) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0,0.6,0.9) -- ++(0.2,0,0) -- ++(0,0,-1.8) -- ++(-0.2,0,0) -- cycle;
+
+    \node[align=center, anchor=north] (image) at ($(image_g) + (0.1,-0.6,0.9)$) {$I$};
+
+    % Instance Segmentation and M_i
+    \draw[thick] (image_b) ++(0.2,0,0) -- ++(0.8,0,0) node [draw=black, thick, align=center, anchor=west] (instance_segmentation) {Instance\\Segmentation};
+    \draw[thick] (instance_segmentation.east) -- ++(0.8,0,0) node[right] (mask_i) {$M_i$};
+
+
+    % Depth image
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!30] (depth) ++(0,0.6,0.9) -- ++(0,-1.2,0) -- ++(0.2,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!30] (depth) ++(0.2,0.6,0.9) -- ++(0,-1.2,0) -- ++(0,0,-1.8) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!30] (depth) ++(0,0.6,0.9) -- ++(0.2,0,0) -- ++(0,0,-1.8) -- ++(-0.2,0,0) -- cycle;
+    
+    \node[align=center, anchor=north] (image) at ($(depth) + (0.1,-0.6,0.9)$) {$D$};
+
+    % Registered
+    \draw[thick,<->] (depth) ++ (0.1,1.1,0) -- ($(image_g)+(0.1,-1.1,0)$) node [midway, right] {Registered};;
+
+
+    % Concat
+    \draw[thick] let
+        \p1 = (mask_i.east),
+        \p2 = (depth)
+        in 
+        (depth)  ++ (0.2,0,0) -- ($(\x1, \y2)-(0.2,0,0)$) to[out=0, in=-90] ($(concat_depth)+(0.1,-0.6,0)$);
+
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!30] (concat_depth) ++(0,0.6,0.9) -- ++(0,-1.2,0) -- ++(0.2,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!30] (concat_depth) ++(0.2,0.6,0.9) -- ++(0,-1.2,0) -- ++(0,0,-1.8) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!30] (concat_depth) ++(0,0.6,0.9) -- ++(0.2,0,0) -- ++(0,0,-1.8) -- ++(-0.2,0,0) -- cycle;
+    
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!60] (concat_mask) ++(0,0.6,0.9) -- ++(0,-1.2,0) -- ++(0.2,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!60] (concat_mask) ++(0.2,0.6,0.9) -- ++(0,-1.2,0) -- ++(0,0,-1.8) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=gray!60] (concat_mask) ++(0,0.6,0.9) -- ++(0.2,0,0) -- ++(0,0,-1.8) -- ++(-0.2,0,0) -- cycle;
+    
+    \draw[thick] (mask_i.east) to[out=0, in=90] ($(concat_mask)+(0.1,0.6,0)$);
+
+    \draw[thick] (0.2,0,0) -- (1,0,0);
+
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (1,1,1) -- (1,-1,1) -- (2,-0.5,0.5) -- (2,0.5,0.5) -- cycle;
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (2,0.5,0.5) -- (2,-0.5,0.5) -- (2,-0.5,-0.5) -- (2,0.5,-0.5) -- cycle;
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (1,1,1) -- (2,0.5,0.5) -- (2,0.5,-0.5) -- (1,1,-1) -- cycle;
+
+    \draw[thick] (2,0,0)--(2.8,0,0);
+    \draw[thick] (2.8,1,0) -- (3.1,1,0) -- (3.1,-1,0) -- (2.8,-1) -- cycle;
+    \draw[thick] (3.1,0.5,0) to[out=0,in=180] +(0.8,1.2,0) node[right](z_obj) {$z_\mathrm{obj}$};
+    \draw[thick] (3.1,0,0) -- (3.9,0,0) node[right](z_scale) {$z_\mathrm{scale}$};
+    \draw[thick] (3.1,-0.5,0) to[out=0,in=180] +(0.8,-1.2,0) node[right](z_pose) {$z_\mathrm{pose}$};
+
+    \draw[thick] (z_obj.east) -- +(0.8,0) coordinate(sdf_vae_in);
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (sdf_vae_in) ++(0,0.5,0.5) -- ++(0,-1,0) -- ++(1,-0.5,0.5) -- ++(0,2,0) -- cycle;
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (sdf_vae_in) ++(1,1,1) -- ++(0,-2,0) -- ++(0,0,-2) -- ++(0,2,0) -- cycle;
+    \draw[thick, contour=0.48\pgflinewidth, fill=blue!20] (sdf_vae_in) ++(0,0.5,0.5) -- ++(1,0.5,0.5) -- ++(0,0,-2) -- ++(-1,-0.5,0.5) -- cycle;
+    \coordinate (sdf_vae_out) at ($(sdf_vae_in)+(1,0,0)$);
+    \draw[thick] (sdf_vae_out) -- ++(0.8,0,0) node[right] (sdf_volume) {$\widetilde{V}_\mathrm{SDF}$};
+    \path let 
+        \p1 = (sdf_volume.east)
+        in
+        node [draw=black, thick, align=center, anchor=west] (diff_rend) at ($(\x1,0)+(0.8,0)$) {Differentiable\\Renderer} ;
+    \draw[thick] (z_scale.east) -- (diff_rend.west);
+
+    \path[draw, thick] let 
+        \p1 = (sdf_volume.east), 
+        \p2 = (z_pose) 
+        in 
+        (z_pose.east) -- (\x1, \y2) to[out=0,in=180] ($(diff_rend.west)+(0,-0.2)$);
+    \draw[thick] (diff_rend.east) -- ++(0.8,0) node[right] {$\widetilde{D}$};
+    \draw[thick] (sdf_volume.east) to[out=0,in=180] ($(diff_rend.west)+(0,0.2)$);
+ 
+    
+\end{tikzpicture}
+\end{document}
