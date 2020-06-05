@@ -44,6 +44,15 @@ Collection of personal tikz graphics
 |------|--------|---------|
 |   |   |   |
 
+## SLAM
+
+| Name | Source | Preview | 
+|------|--------|---------|
+| Bayesian Network | [slam/bayesian_network_slam.tex](slam/bayesian_network_slam.tex) | ![alt text](previews/bayesian_network_slam.png) | 
+| Factor Graph | [slam/factor_graph_slam.tex](slam/factor_graph_slam.tex) | ![alt text](previews/factor_graph_slam.png) | 
+| Markov Network | [slam/markov_network_slam.tex](slam/markov_network_slam.tex) | ![alt text](previews/markov_network_slam.png) | 
+
+
 ## Mathematics
 
 ### Sampling
@@ -57,5 +66,5 @@ Collection of personal tikz graphics
 ### Graphical Models
 | Name | Source | Preview | 
 |------|--------|---------|
-|[Bishop](https://www.springer.com/gp/book/9780387310732) Style|[graphical_models/bishop_style.tex](graphical_models/bishop_style.tex) | ![alt text](previews/bishop_style.png) | 
-|[Koller](https://mitpress.mit.edu/books/probabilistic-graphical-models) Style|[graphical_models/koller_style.tex](graphical_models/koller_style.tex) | ![alt text](previews/koller_style.png) | 
+| [Bishop](https://www.springer.com/gp/book/9780387310732) Style | [graphical_models/bishop_style.tex](graphical_models/bishop_style.tex) | ![alt text](previews/bishop_style.png) | 
+| [Koller](https://mitpress.mit.edu/books/probabilistic-graphical-models) Style | [graphical_models/koller_style.tex](graphical_models/koller_style.tex) | ![alt text](previews/koller_style.png) | 
