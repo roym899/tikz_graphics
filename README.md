@@ -57,4 +57,4 @@ Collection of personal tikz graphics
 ### Graphical Models
 | Name | Source | Preview | 
 |------|--------|---------|
-|[Bishop](https://www.springer.com/gp/book/9780387310732) Style|[graphica_models/bishop_style.tex](fmt/fmt_8.tex) | ![alt text](previews/bishop_style.png) | 
+|[Bishop](https://www.springer.com/gp/book/9780387310732) Style|[graphical_models/bishop_style.tex](graphical_models/bishop_style.tex) | ![alt text](previews/bishop_style.png) | 
