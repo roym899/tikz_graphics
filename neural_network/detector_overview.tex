@@ -1,0 +1,100 @@
+\documentclass[]{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{tikz_utils}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations,backgrounds}
+\usetikzlibrary{angles,calc,positioning}
+\usetikzlibrary{decorations.pathreplacing}
+
+\begin{document}
+
+\fontsize{8}{12}\selectfont
+
+\begin{tikzpicture}[scale=1]
+    \coordinate (image_r) at (0,0,0);
+    \coordinate (image_g) at (0.3,0,0);
+    \coordinate (image_b) at (0.6,0,0);
+    \coordinate (mobilenet) at (2.2,0,0);
+    \coordinate (feature) at (6,0,0);
+    \coordinate (conv) at (10,0,0);
+    \coordinate (bbs) at (14,0,0);
+
+    % Coordinate system
+    % \draw[red] (0,0,0) -- (1,0,0);
+    % \draw[green] (0,0,0) -- (0,1,0);
+    % \draw[blue] (0,0,0) -- (0,0,1);
+
+    % RGB image
+    \draw[thin, contour=0.48\pgflinewidth, fill=red!30] (image_r) ++(0,1,1.33) -- ++(0,-2,0) -- node[below] {$R$} ++(0.3,0,0) -- ++(0,2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=red!30] (image_r) ++(0.3,1,1.33) -- ++(0,-2,0) -- ++(0,0,-2.66) -- ++(0,2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=red!30] (image_r) ++(0,1,1.33) -- ++(0.3,0,0) -- ++(0,0,-2.66) -- ++(-0.3,0,0) -- cycle;
+
+    \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0,1,1.33) -- ++(0,-2,0) -- node[below] {$G$} ++(0.3,0,0) -- ++(0,2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0.3,1,1.33) -- ++(0,-2,0) -- ++(0,0,-2.66) -- ++(0,2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0,1,1.33) -- ++(0.3,0,0) -- ++(0,0,-2.66) -- ++(-0.3,0,0) -- cycle;
+
+    \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0,1,1.33) -- ++(0,-2,0) -- node[below] {$B$} ++(0.3,0,0) -- ++(0,2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0.3,1,1.33) -- ++(0,-2,0) -- node[below right] {$640$} ++(0,0,-2.66) -- node[right] {$480$} ++(0,2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0,1,1.33) -- ++(0.3,0,0) -- ++(0,0,-2.66) -- ++(-0.3,0,0) -- cycle;
+
+    \draw[thick] ($(image_b) + (0.3,0,0)$) -- (mobilenet);
+
+    \node at ($(image_g) + (0.15, -1, 1.33) + (0, -0.7, 0)$) {Input Image};
+
+    % MobileNetV2
+    \draw[thin, contour=0.48\pgflinewidth, fill=white] (mobilenet) ++(0,0.6,0.6) -- ++(0,-1.2,0) -- ++(3,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=white] (mobilenet) ++(3,0.6,0.6) -- ++(0,-1.2,0) -- ++(0,0,-1.2) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=white] (mobilenet) ++(0,0.6,0.6) -- ++(3,0,0) -- ++(0,0,-1.2) -- ++(-3,0,0) -- cycle;
+    \node at ($(mobilenet) + (1.5, 0 ,0.6)$) {MobileNetV2};
+
+    \draw[thick] ($(mobilenet) + (3,0,0)$) -- (feature);
+
+    \draw[thin, contour=0.48\pgflinewidth, fill=orange!30] (feature) ++(0,0.6,0.8) -- ++(0,-1.2,0) -- node[below] {$1280$} ++(3,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=orange!30] (feature) ++(3,0.6,0.8) -- ++(0,-1.2,0) -- node[below right] {$20$} ++(0,0,-1.6) -- node[right] {$15$} ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=orange!30] (feature) ++(0,0.6,0.8) -- ++(3,0,0) -- ++(0,0,-1.6) -- ++(-3,0,0) -- cycle;
+
+    \node at ($(feature) + (1.5, -0.6, 0.8) + (0, -0.7, 0)$) {Feature Tensor};
+
+    \draw[thick] ($(feature) + (3,0,0)$) -- (conv);
+
+    \draw[thin, contour=0.48\pgflinewidth, fill=white] (conv) ++(0,0.2,0.2) -- ++(0,-0.4,0) -- ++(3,0,0) -- ++(0,0.4,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=white] (conv) ++(3,0.2,0.2) -- ++(0,-0.4,0) -- ++(0,0,-0.4) -- ++(0,0.4,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=white] (conv) ++(0,0.2,0.2) -- ++(3,0,0) -- ++(0,0,-0.4) -- ++(-3,0,0) -- cycle;
+    \node at ($(conv) + (1.5, 0 ,0.2)$) {$1\times 1$ Conv};
+
+    \draw[thick, decorate,decoration={brace,amplitude=3pt}] ($(conv) + (-0.1, 0.4, 0)$) -- node[above=0.1] {Head} ++ (3.3,0,0); 
+
+    \draw[thick] ($(conv) + (3,0,0)$) -- (bbs);
+
+    \draw[thin, contour=0.48\pgflinewidth, fill=orange!30] (bbs) ++(0,0.6,0.8) -- ++(0,-1.2,0) -- node[below] {$5$} ++(0.5,0,0) -- ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=orange!30] (bbs) ++(0.5,0.6,0.8) -- ++(0,-1.2,0) -- node[below right] {$20$} ++(0,0,-1.6) -- node[right] {$15$} ++(0,1.2,0) -- cycle;
+    \draw[thin, contour=0.48\pgflinewidth, fill=orange!30] (bbs) ++(0,0.6,0.8) -- ++(0.5,0,0) -- ++(0,0,-1.6) -- ++(-0.5,0,0) -- cycle;
+
+    \node[align=center] at ($(bbs) + (0.25, -0.6, 0.8) + (0, -0.7, 0)$) {Bounding Box Tensor};
+
+    \draw[thick, decorate,decoration={brace,amplitude=3pt}] ($(mobilenet) + (-0.2, 1, 0)$) -- node[above=0.1] {Backbone} ++ (3.6,0,0); 
+
+    % \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0,0.6,0.9) -- ++(0,-1.2,0) -- ++(0.2,0,0) -- ++(0,1.2,0) -- cycle;
+    % \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0.2,0.6,0.9) -- ++(0,-1.2,0) -- ++(0,0,-1.8) -- ++(0,1.2,0) -- cycle;
+    % \draw[thin, contour=0.48\pgflinewidth, fill=green!30] (image_g) ++(0,0.6,0.9) -- ++(0.2,0,0) -- ++(0,0,-1.8) -- ++(-0.2,0,0) -- cycle;
+
+    % \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0,0.6,0.9) -- ++(0,-1.2,0) -- ++(0.2,0,0) -- ++(0,1.2,0) -- cycle;
+    % \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0.2,0.6,0.9) -- ++(0,-1.2,0) -- ++(0,0,-1.8) -- ++(0,1.2,0) -- cycle;
+    % \draw[thin, contour=0.48\pgflinewidth, fill=blue!30] (image_b) ++(0,0.6,0.9) -- ++(0.2,0,0) -- ++(0,0,-1.8) -- ++(-0.2,0,0) -- cycle;
+    
+\end{tikzpicture}
+
+\end{document}
