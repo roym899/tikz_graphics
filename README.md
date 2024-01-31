@@ -22,15 +22,55 @@ Collection of tikz graphics I made
 
 #### Lazy State-Lattice Planner
 
+[![alt text](previews/lattice_1.png)](./state_lattice/lattice_1.tex)
+[![alt text](previews/lattice_2.png)](./state_lattice/lattice_2.tex)
+[![alt text](previews/lattice_3.png)](./state_lattice/lattice_3.tex)
+[![alt text](previews/lattice_4.png)](./state_lattice/lattice_4.tex)
+[![alt text](previews/lattice_5.png)](./state_lattice/lattice_5.tex)
+[![alt text](previews/lattice_6.png)](./state_lattice/lattice_6.tex)
 
 #### Rapidly Exploring Random Trees
 
+###### RRT
 
-### Misc
+[![alt text](previews/rrt_1.png)](./rrt/rrt_1.tex)
+[![alt text](previews/rrt_2.png)](./rrt/rrt_2.tex)
+[![alt text](previews/rrt_3.png)](./rrt/rrt_3.tex)
+[![alt text](previews/rrt_4.png)](./rrt/rrt_4.tex)
+[![alt text](previews/rrt_5.png)](./rrt/rrt_5.tex)
+[![alt text](previews/rrt_6.png)](./rrt/rrt_6.tex)
+[![alt text](previews/rrt_7.png)](./rrt/rrt_7.tex)
 
-| Name | Source | Preview | 
-|------|--------|---------|
-|   |   |   |
+###### RRT-Connect
+
+[![alt text](previews/rrt_connect_1.png)](./rrt/rrt_connect_1.tex)
+[![alt text](previews/rrt_connect_2.png)](./rrt/rrt_connect_2.tex)
+[![alt text](previews/rrt_connect_3.png)](./rrt/rrt_connect_3.tex)
+[![alt text](previews/rrt_connect_4.png)](./rrt/rrt_connect_4.tex)
+[![alt text](previews/rrt_connect_5.png)](./rrt/rrt_connect_5.tex)
+[![alt text](previews/rrt_connect_6.png)](./rrt/rrt_connect_6.tex)
+[![alt text](previews/rrt_connect_7.png)](./rrt/rrt_connect_7.tex)
+
+###### RRT* Rewiring
+[![alt text](previews/rrt_star_extension_1.png)](./rrt/rrt_star_extension_1.tex)
+[![alt text](previews/rrt_star_extension_2.png)](./rrt/rrt_star_extension_2.tex)
+[![alt text](previews/rrt_star_extension_3.png)](./rrt/rrt_star_extension_3.tex)
+[![alt text](previews/rrt_star_extension_4.png)](./rrt/rrt_star_extension_4.tex)
+[![alt text](previews/rrt_star_extension_5.png)](./rrt/rrt_star_extension_5.tex)
+
+###### Closest Point Methods
+
+[![alt text](previews/rrt_closest_point_vertex.png)](./rrt/rrt_closest_point_vertex.tex)
+[![alt text](previews/rrt_closest_point_projection.png)](./rrt/rrt_closest_point_projection.tex)
+[![alt text](previews/rrt_closest_point_intermediate_vertices.png)](./rrt/rrt_closest_point_intermediate_vertices.tex)
+
+###### Extension Methods
+[![alt text](previews/rrt_strategy_extend.png)](./rrt/rrt_strategy_extend.tex)
+[![alt text](previews/rrt_strategy_connect.png)](./rrt/rrt_strategy_connect.tex)
+
+#### Miscellaneous
+[![alt text](previews/clearance.png)](./motion_planning_misc/clearance.tex)
+[![alt text](previews/combinatorial.png)](./motion_planning_misc/combinatorial.tex)
 
 ## SLAM
 
