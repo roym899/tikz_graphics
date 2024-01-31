@@ -1,5 +1,5 @@
-# tikz_graphics
-Collection of tikz graphics I made
+# TikZ Graphics
+Collection of TikZ graphics I made. The preview images below link to the respective source file.
 
 ## Motion Planning
 
